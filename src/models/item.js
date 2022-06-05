@@ -24,6 +24,18 @@ const Item = (sequelize) =>
             );
           }
         },
+        isPositive(value) {
+          if (parseInt(value) < 0) {
+            throw new Error("payment cannot be less than zero");
+          }
+        },
+      },
+    },
+    crate_ID: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "crates",
+        key: "crate_ID",
       },
     },
   });
