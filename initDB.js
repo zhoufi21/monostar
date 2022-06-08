@@ -1,9 +1,9 @@
 import dotenv from "dotenv";
 import { Sequelize } from "sequelize";
-import { Item } from "./models/item.js";
-import { Crate } from "./models/crate.js";
-import { Transaction } from "./models/transaction.js";
-import { Customer } from "./models/customer.js";
+import { Item } from "./src/models/item.js";
+import { Crate } from "./src/models/crate.js";
+import { Transaction } from "./src/models/transaction.js";
+import { Customer } from "./src/models/customer.js";
 dotenv.config();
 async function startDatabase() {
   const sequelize = new Sequelize(
@@ -19,10 +19,10 @@ async function startDatabase() {
   const customer = Customer(sequelize);
   try {
     sequelize.authenticate();
-    customer.sync();
-    crate.sync();
-    item.sync();
-    transaction.sync();
+    await customer.sync();
+    await crate.sync();
+    await item.sync();
+    await transaction.sync();
     return sequelize;
   } catch (error) {
     console.error("unable to start database: ", error);
