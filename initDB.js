@@ -23,6 +23,8 @@ async function startDatabase() {
     await crate.sync();
     await item.sync();
     await transaction.sync();
+
+    
     return sequelize;
   } catch (error) {
     console.error("unable to start database: ", error);
